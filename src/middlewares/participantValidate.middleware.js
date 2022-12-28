@@ -1,6 +1,7 @@
 const { findParticipantConversations } = require('../participants/participants.controllers')
 
 const participantValidate = ( req, res, next ) => {
+    
     const conversationId = req.params.conversation_id
     const userId = req.user.id
 

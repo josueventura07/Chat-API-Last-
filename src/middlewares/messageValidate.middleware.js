@@ -1,16 +1,16 @@
-const { findParticipantMessage } = require('../participants/participants.controllers')
+const { ownerValidate } = require('../messages/messages.controllers')
 
 const messageValidate = ( req, res, next ) => {
-    const messageId = req.params.message_id
+    
+    const id = req.params.message_id
     const userId = req.user.id
-
-
-    findParticipantMessage(userId, messageId)
+     
+    ownerValidate(id, userId)
         .then(data => {
             if(data) {
                 next()
             } else {
-                res.status(400).json({message: "You aren't authorized to watch this conversation"})
+                res.status(400).json({message: `Invalid ID or Unauthorized`})
             }
         })
         .catch(err => {

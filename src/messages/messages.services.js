@@ -51,7 +51,7 @@ const deleteMessage = ( req, res ) => {
             if(data) {
                 res.status(204).json()
             } else {
-                res.status(404).json({message: 'Not Exist or Unauthorized'})
+                res.status(404).json({message: 'Invalid ID'})
             }
         })
         .catch(err => {

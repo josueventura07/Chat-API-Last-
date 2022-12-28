@@ -3,6 +3,7 @@ const conversationsevices = require('./conversations.services')
 const messagesServices = require('../messages/messages.services')
 const passportJWT = require('../middlewares/auth.middleware')
 const participantValidate = require('../middlewares/participantValidate.middleware')
+const messageValidate = require('../middlewares/messageValidate.middleware')
 
 
 router.route('/')
@@ -20,7 +21,7 @@ router.route('/:conversation_id/messages')
 
 router.route('/:conversation_id/messages/:message_id')
     .get(passportJWT.authenticate('jwt', {session: false}), participantValidate, messagesServices.getMessageById)
-    .delete(passportJWT.authenticate('jwt', {session: false}), participantValidate, messagesServices.deleteMessage)
+    .delete(passportJWT.authenticate('jwt', {session: false}), participantValidate, messageValidate, messagesServices.deleteMessage)
 
 
 module.exports = router    
